@@ -71,6 +71,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", address='" + address + '\'' +
                 ", age=" + age +
+                ", height=" + height +
                 '}';
     }
 }
