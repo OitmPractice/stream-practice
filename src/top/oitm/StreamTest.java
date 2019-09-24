@@ -74,6 +74,7 @@ public class StreamTest {
 
     @Test
     public void testFilter() {
+        // parallelStream：一个并行执行的流.它通过默认的ForkJoinPool,提高多线程任务的速度
         List<User> collect = users.parallelStream()
                 .filter(user -> {
                     return user.getHeight() > 170 && user.getAge() > 15;
@@ -110,7 +111,7 @@ public class StreamTest {
     @Test
     public void testLimitAndSkip(){
         //limit 返回 Stream 的前面 n 个元素；skip 则是扔掉前 n 个元素
-        List<User> collect = users.stream().skip(2).limit(4).collect(Collectors.toList());
+        List<User> collect = users.stream().skip(2).limit(4).peek(user-> System.out.println(user)).collect(Collectors.toList());
         System.out.println(collect);
     }
 
@@ -122,8 +123,8 @@ public class StreamTest {
                 .filter(user -> {
                     return user.getHeight() > 170 && user.getAge() > 15;
                 })
-                .sorted(Comparator.comparing(User::getUsername).reversed())
-                .map(user -> user.getId()).collect(Collectors.toList());
+                .sorted(Comparator.comparing(User::getUsername))
+                .map(user -> user.getUsername()).collect(Collectors.toList());
         System.out.println(collect);
     }
 
